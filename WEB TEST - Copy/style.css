@@ -1,0 +1,299 @@
+/* Reset cơ bản */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #fafafa;
+}
+
+/* Header */
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    /* canh giữa logo và chữ theo chiều dọc */
+    gap: 20px;
+}
+
+.logo {
+    width: 300px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.header-text h1,
+.header-text p {
+    margin: 0;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    background-color: #333;
+    justify-content: flex-start;
+    padding-left: 20px;
+}
+
+.navbtn {
+    background-color: inherit;
+    color: white;
+    padding: 14px 20px;
+    border: 1px solid #555;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.navbtn:hover {
+    background-color: #575757;
+    border-color: #777;
+}
+
+/* Trang chính */
+.page {
+    width: 100vw;
+    height: 50vh;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Container chính - kiểu cột dọc */
+.content-column {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Hàng 2 khối bên dưới */
+.content-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Box profile chung */
+.profile-box {
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    /* Nếu không muốn bo góc */
+    display: flex;
+    align-items: center;
+    padding: 50px;
+    /* Có thể điều chỉnh */
+    width: 100vw;
+    /* Chiếm toàn bộ chiều rộng của màn hình */
+    box-sizing: border-box;
+    /* Đảm bảo padding không làm tràn ra ngoài */
+    margin: 0;
+    /* Xóa khoảng cách dư nếu có */
+}
+
+
+/* Box profile khối trên rộng full */
+.profile-box.single-box {
+    width: 102%;
+    background-color: #e2f0ff;
+    border: 1px solid #007bff;
+    padding: 50px;
+    box-sizing: border-box;
+    display: block;
+    text-align: center;
+    /* đảm bảo không bị flex chia nhỏ */
+}
+
+/* Ảnh đại diện tròn */
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+/* Thông tin trong box */
+.info h3 {
+    margin: 0 0 8px 0;
+}
+
+.info p {
+    margin: 4px 0;
+}
+
+/* Container WiFi */
+.container {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 800px;
+    margin: 0 auto;
+}
+
+.container2 {
+    text-align: left;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 40px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 800px;
+    margin: 20px auto;
+}
+
+.container2 h1,
+.container2 h2 {
+    color: #333;
+}
+
+/* Button chung */
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+input {
+    padding: 8px;
+    margin: 10px 0;
+    width: 80%;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 40px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 1400px;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    border: 5px solid red;
+    /* viền đỏ dày để test */
+}
+
+th,
+td {
+    border: 3px solid black;
+    /* viền trong ô dày hơn */
+    padding: 10px 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+.page {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    height: 0;
+    overflow: hidden;
+}
+
+.page.active {
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+    overflow: visible;
+}
+#loginPage {
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh; /* giúp căn giữa dọc */
+}
+
+#loginPage .container2 {
+    max-width: 500px;
+    margin: 40px auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.profile-box {
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.profile-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+button, .navbtn {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover, .navbtn:hover {
+    transform: scale(1.03);
+}
+table {
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+table:hover {
+    transform: scale(1.005);
+}
+#residentPage {
+    background-image: url('istockphoto-1361546459-612x612.jpg'); /* hoặc link ảnh nền của bạn */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 40px 20px;
+}
+
+#residentPage table {
+    background-color: rgba(255, 255, 255, 0.6); /* nền trắng mờ 60% */
+    border-radius: 12px;
+    backdrop-filter: blur(6px); /* làm mờ nền phía sau bảng */
+    -webkit-backdrop-filter: blur(6px); /* cho trình duyệt Safari */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+#wifiPage {
+    background-image: url('wifi.jpg'); /* hoặc dùng link ảnh online */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 40px 20px;
+}
+
+#wifiPage .container,
+#wifiPage .container2 {
+    background-color: rgba(255, 255, 255, 0.85); /* trắng mờ */
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    margin-bottom: 20px;
+}

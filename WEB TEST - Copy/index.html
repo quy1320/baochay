@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quản lý Căn hộ</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <img src="logo.jpg" alt="Logo" class="logo" />
+            <div class="header-text">
+                <h1>Quản lý Căn hộ</h1>
+                <p>Website quản lý cư dân và thiết bị</p>
+            </div>
+        </div>
+    </header>
+    <!-- Navbar -->
+    <nav class="navbar">
+    <button class="navbtn" id="loginBtn" onclick="showPage('loginPage')">Đăng nhập</button>
+    <button class="navbtn" onclick="showPage('homePage')">Trang chủ</button>
+    <button class="navbtn" onclick="showPage('cameraPage')">Camera</button>
+    <button class="navbtn" onclick="showPage('wifiPage')">Kết nối WiFi</button>
+    <button class="navbtn" onclick="showPage('residentPage')">Giám sát</button>
+
+    <div style="flex-grow: 1;"></div> <!-- đẩy logoutBtn sang phải -->
+    <button class="navbtn" id="logoutBtn" style="display: none;" onclick="logout()">Đăng xuất</button>
+</nav>
+
+
+    <!-- Trang chủ -->
+    <div id="homePage" class="page">
+        <div class="content-column">
+            <!-- Khối trên rộng full, chỉ 1 box đơn -->
+            <div class="profile-box single-box">
+                <div class="info">
+                    <h3>ĐỀ TÀI : HỆ THỐNG AN NINH VÀ CẢNH BÁO CHÁY NỔ CHO CHUNG CƯ VỪA VÀ NHỎ SỬ DỤNG MẠNG WIFI MESH
+                    </h3>
+                    <p>GVHD: Trương Quang Phúc</p>
+                </div>
+            </div>
+
+            <!-- 2 khối dưới chia đôi -->
+            <div class="content-row">
+                <div class="profile-box">
+                    <img src="huy.jpg" alt="Lê Huy" class="avatar" />
+                    <div class="info">
+                        <h3>Lê Huy</h3>
+                        <p>MSSV : 20161203</p>
+                        <p>Email : 20161203@student.hcmute.edu.vn</p>
+                        <p>SĐT : 0856554779</p>
+                    </div>
+                </div>
+
+                <div class="profile-box">
+                    <img src="khoi.jpg" alt="Nguyễn Lan" class="avatar" />
+                    <div class="info">
+                        <h3>Nguyễn Lê Minh Khôi</h3>
+                        <p>MSSV : 20161204</p>
+                        <p>Email : 20161204@student.hcmute.edu.vn</p>
+                        <p>SĐT : 0987654321</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Camera -->
+    <div id="cameraPage" class="page">
+        <h2>Camera</h2>
+        <p>Nội dung Camera sẽ ở đây.</p>
+    </div>
+
+    <!-- Kết nối WiFi -->
+    <div id="wifiPage" class="page" >
+        <div class="container">
+            <h2>Connecting Bluetooth Wi-Fi Setup</h2>
+            <button id="scanButton">Scan for ESP32</button>
+            <p id="status"></p>
+            <form id="wifiForm" style="display:none;">
+                <label for="ssid">Wi-Fi SSID:</label>
+                <input type="text" id="ssid" required /><br />
+                <label for="password">Wi-Fi Password:</label>
+                <input type="password" id="password" required /><br />
+                <button type="submit">Connect to Wi-Fi</button>
+            </form>
+        </div>
+
+        <div class="container2">
+            <h2>Hướng dẫn kết nối Wifi cho thiết bị</h2>
+            <p>1. Cấp nguồn cho MODULE </p>
+            <p>2. Chọn "Scan for ESP32"</p>
+            <p>3. Chọn thiết bị cần kết nối với tên thiết bị được in trên thiết bị VD: MODULE #### </p>
+            <p>4. Nhập Wi-Fi SSID và mật khẩu</p>
+            <p>5. Click "Connect to Wi-Fi"</p>
+            <p>6. Đợi thiết bị kết nối Wi-Fi</p>
+            <p>7. Nếu thiết bị kêu 2 tiếng bip là kết nối thành công</p>
+            <p>8. Nếu thiết bị kêu 1 tiếng bip là kết nối thất bại kiểm tra lại SSID và mật khẩu</p>
+        </div>
+    </div>
+
+    <!-- Dữ liệu cư dân -->
+    <div id="residentPage" class="page" >
+        <table>
+            <tr>
+                <th>Lầu</th>
+                <th>Khói</th>
+                <th>Gas</th>
+                <th>Phòng</th>
+                <th colspan="4">Khói</th>
+                <th colspan="4">Gas</th>
+                <th>Nhiệt độ</th>
+                <th>Độ ẩm</th>
+            </tr>
+            <tr>
+                <th rowspan="3">1</th>
+                <td>-</td>
+                <td>-</td>
+                <td>101</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>-</td>
+                <td>102</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+
+                <td>-</td>
+                <td>-</td>
+                <td>103</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>Lầu</th>
+                <th>Khói</th>
+                <th>Gas</th>
+                <th>Phòng</th>
+                <th colspan="4">Khói</th>
+                <th colspan="4">Gas</th>
+                <th>Nhiệt độ</th>
+                <th>Độ ẩm</th>
+            </tr>
+            <tr>
+                <th rowspan="3">2</th>
+                <td>-</td>
+                <td>-</td>
+                <td>201</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>-</td>
+                <td>202</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+
+                <td>-</td>
+                <td>-</td>
+                <td>203</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>Lầu</th>
+                <th>Khói</th>
+                <th>Gas</th>
+                <th>Phòng</th>
+                <th colspan="4">Khói</th>
+                <th colspan="4">Gas</th>
+                <th>Nhiệt độ</th>
+                <th>Độ ẩm</th>
+            </tr>
+            <tr>
+                <th rowspan="3">3</th>
+                <td>-</td>
+                <td>-</td>
+                <td>301</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>-</td>
+                <td>302</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+
+                <td>-</td>
+                <td>-</td>
+                <td>303</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        </table>
+    </div>
+    <!-- Đăng nhập -->
+<div id="loginPage" class="page active">
+    <div class="container2">
+        <h2>Đăng nhập hệ thống</h2>
+        <form id="loginForm">
+            <label for="loginEmail">Email:</label><br />
+            <input type="email" id="loginEmail" name="email" required /><br />
+            <label for="loginPassword">Mật khẩu:</label><br />
+            <input type="password" id="loginPassword" name="password" required /><br />
+            <button type="submit">Đăng nhập</button>
+        </form>
+        <p id="loginStatus" style="color: red; margin-top: 10px;"></p>
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <footer>
+        <p>TRƯỜNG ĐẠI HỌC SƯ PHẠM KỸ THUẬT TP. HCM - HCMUTE</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyCaUmIE3hWU0mLLLw3wtU7BNkoxnmL3m6U",
+        authDomain: "chung-cu-an-ninh.firebaseapp.com",
+        databaseURL: "https://chung-cu-an-ninh-default-rtdb.firebaseio.com",
+        projectId: "chung-cu-an-ninh",
+        storageBucket: "chung-cu-an-ninh.firebasestorage.app",
+        messagingSenderId: "413202920707",
+        appId: "1:413202920707:web:c28e96396a314ef3c1e536",
+        measurementId: "G-28V9P24V2R"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+</script>
+<script type="module">
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+
+    const db = getDatabase();
+
+    function updateRoomData() {
+        const table = document.querySelector("#residentPage table");
+        const hanhlangRef = ref(db, "can_ho/lau1/hanhlang");
+        const phongRef = ref(db, "can_ho/lau1/phong101");
+
+        // Cập nhật dữ liệu hành lang tầng 1
+        onValue(hanhlangRef, (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                table.rows[1].cells[1].innerText = data.khoi;
+                table.rows[1].cells[2].innerText = data.gas;
+            }
+        });
+
+        // Cập nhật dữ liệu các phòng tầng 1
+        onValue(phongRef, (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                let roomIndex = 0;
+                for (let key in data) {
+                    const room = data[key];
+                    const row = table.rows[1 + roomIndex]; // dòng 2 là phòng 001
+                    row.cells[4].innerText = room.khoi;
+                    row.cells[8].innerText = room.gas;
+                    row.cells[12].innerText = room.temperature;
+                    row.cells[13].innerText = room.humidity;
+                    roomIndex++;
+                }
+            }
+        });
+    }
+
+    // Gọi khi chuyển sang tab giám sát
+
+</script>
+
+</html>
