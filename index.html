@@ -2,7 +2,6 @@
 <html lang="vi">
 
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Quản lý Căn hộ</title>
@@ -27,11 +26,9 @@
         <button class="navbtn" onclick="showPage('cameraPage')">Camera</button>
         <button class="navbtn" onclick="showPage('wifiPage')">Kết nối WiFi</button>
         <button class="navbtn" onclick="showPage('residentPage')">Giám sát</button>
-
         <div style="flex-grow: 1;"></div> <!-- đẩy logoutBtn sang phải -->
         <button class="navbtn" id="logoutBtn" style="display: none;" onclick="logout()">Đăng xuất</button>
     </nav>
-
 
     <!-- Trang chủ -->
     <div id="homePage" class="page">
@@ -73,7 +70,7 @@
     <!-- Camera -->
     <div id="cameraPage" class="page">
         <h2>Camera</h2>
-        <p>Nội dung Camera sẽ ở đây.</p>
+        <img src="http://172.20.10.13:5000/video" width="640" height="480" alt="Camera Stream" />
     </div>
 
     <!-- Kết nối WiFi -->
@@ -284,7 +281,6 @@
             </tr>
         </table>
     </div>
-    <!-- Đăng nhập -->
     <div id="loginPage" class="page active">
         <div class="container2">
             <h2>Đăng nhập hệ thống</h2>
@@ -306,6 +302,9 @@
     </footer>
 
     <script src="script.js"></script>
+    <div id="alertContainer"></div>
+
+
 </body>
 <script type="module">
     // Import the functions you need from the SDKs you need
@@ -336,17 +335,31 @@
 
     const db = getDatabase();
 
+
     function updateRoomData() {
         const table = document.querySelector("#residentPage table");
-        const hanhlangRef = ref(db, "can_ho/lau1/hanhlang");
-        const phongRef = ref(db, "can_ho/lau1/phong101");
+        const hanhlangRef = ref(db, "can_ho/lau1/hanh_lang");
+        const phongRef = ref(db, "can_ho/lau1");
 
         // Cập nhật dữ liệu hành lang tầng 1
         onValue(hanhlangRef, (snapshot) => {
             const data = snapshot.val();
             if (data) {
-                table.rows[1].cells[1].innerText = data.khoi;
-                table.rows[1].cells[2].innerText = data.gas;
+                table.rows[1].cells[1].innerText = data.khoi1;
+                table.rows[2].cells[0].innerText = data.khoi2;
+                table.rows[3].cells[0].innerText = data.khoi3;
+
+                table.rows[1].cells[2].innerText = data.gas1;
+                table.rows[2].cells[1].innerText = data.gas2;
+                table.rows[3].cells[1].innerText = data.gas3;
+                if (data.khoi1 > 10) showAlert("⚠️ Cảnh báo KHÓI cao tại hành lang lầu 1!");
+                if (data.gas1 > 50) showAlert("⚠️ Cảnh báo GAS cao tại hành lang lầu 1!");
+                if (data.khoi2 > 10) showAlert("⚠️ Cảnh báo KHÓI cao tại hành lang lầu 1!");
+                if (data.gas2 > 50) showAlert("⚠️ Cảnh báo GAS cao tại hành lang lầu 1!");
+                if (data.khoi3 > 10) showAlert("⚠️ Cảnh báo KHÓI cao tại hành lang lầu 1!");
+                if (data.gas3 > 50) showAlert("⚠️ Cảnh báo GAS cao tại hành lang lầu 1!");
+                if (data.sos > 0) showAlert("🔥 Báo Cháy Khẩn ấp");
+
             }
         });
 
@@ -356,20 +369,41 @@
             if (data) {
                 let roomIndex = 0;
                 for (let key in data) {
-                    const room = data[key];
-                    const row = table.rows[1 + roomIndex]; // dòng 2 là phòng 001
-                    row.cells[4].innerText = room.khoi;
-                    row.cells[8].innerText = room.gas;
-                    row.cells[12].innerText = room.temperature;
-                    row.cells[13].innerText = room.humidity;
-                    roomIndex++;
+                    if (key.startsWith("phong")) { // chỉ lấy các node tên phongxxx
+                        const room = data[key];
+                        const row = table.rows[1 + roomIndex];
+                        row.cells[4].innerText = room.khoi1 ?? "-";
+                        row.cells[5].innerText = room.khoi2 ?? "-";
+                        row.cells[6].innerText = room.khoi3 ?? "-";
+                        row.cells[7].innerText = room.khoi4 ?? "-";
+                        row.cells[8].innerText = room.gas1 ?? "-";
+                        row.cells[9].innerText = room.gas2 ?? "-";
+                        row.cells[10].innerText = room.gas3 ?? "-";
+                        row.cells[11].innerText = room.gas4 ?? "-";
+                        row.cells[12].innerText = room.temperature ?? "-";
+                        row.cells[13].innerText = room.humidity ?? "-";
+                        if (room.khoi1 > 10) showAlert(`⚠️ Khói cao tại phòng ${key.toUpperCase()}`);
+                        if (room.gas1 > 50) showAlert(`⚠️ Gas cao tại phòng ${key.toUpperCase()}`);
+                        if (room.khoi2 > 10) showAlert(`⚠️ Khói cao tại phòng ${key.toUpperCase()}`);
+                        if (room.gas2 > 50) showAlert(`⚠️ Gas cao tại phòng ${key.toUpperCase()}`);
+                        if (room.khoi3 > 10) showAlert(`⚠️ Khói cao tại phòng ${key.toUpperCase()}`);
+                        if (room.gas3 > 50) showAlert(`⚠️ Gas cao tại phòng ${key.toUpperCase()}`);
+                        if (room.khoi4 > 10) showAlert(`⚠️ Khói cao tại phòng ${key.toUpperCase()}`);
+                        if (room.gas4 > 50) showAlert(`⚠️ Gas cao tại phòng ${key.toUpperCase()}`);
+                        if (room.sos > 0) showAlert(`Phòng 101 cần giúp ${key.toUpperCase()}`);
+                        roomIndex++;
+                    }
                 }
             }
         });
     }
 
     // Gọi khi chuyển sang tab giám sát
-
+    window.showPage = function (id) {
+        document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+        if (id === "residentPage") updateRoomData();
+    };
 </script>
 
 </html>

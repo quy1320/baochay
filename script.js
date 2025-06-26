@@ -1,3 +1,4 @@
+
 let isLoggedIn = false;
 // Chuyển trang
 function showPage(pageId) {
@@ -16,8 +17,6 @@ function showPage(pageId) {
 
     if (pageId === "residentPage") updateRoomData();
 }
-
-
 
 // --- Bluetooth Wi-Fi Connect --- 
 let bluetoothDevice;
@@ -68,7 +67,7 @@ document.getElementById('wifiForm').addEventListener('submit', async (event) => 
 
 // Khi mở web, tự động mở Trang chủ
 window.onload = () => {
-    showPage("loginPage");
+    showPage('loginPage');
 };
 // Xử lý đăng nhập giả lập
 document.getElementById("loginForm").addEventListener("submit", function (e) {
@@ -77,53 +76,28 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
     const password = document.getElementById("loginPassword").value;
 
     // Bạn có thể thay đoạn này bằng xác thực Firebase hoặc API
-if (email === "admin@example.com" && password === "123456") {
-    isLoggedIn = true;
-    document.getElementById("loginStatus").style.color = "green";
-    document.getElementById("loginStatus").textContent = "Đăng nhập thành công!";
-    alert("Chào mừng bạn đã đăng nhập!");
+    if (
+        (email === "admin@example.com" && password === "123456") ||
+        (email === "20161203@student.hcmute.edu.vn" && password === "123456") ||
+        (email === "20161204@student.hcmute.edu.vn" && password === "123456")
+    ) {
+        isLoggedIn = true;
+        document.getElementById("loginStatus").style.color = "green";
+        document.getElementById("loginStatus").textContent = "Đăng nhập thành công!";
+        alert("Chào mừng bạn đã đăng nhập!");
 
-    // Ẩn nút đăng nhập, hiện nút đăng xuất
-    document.getElementById("loginBtn").style.display = "none";
-    document.getElementById("logoutBtn").style.display = "inline-block";
+        // Ẩn nút đăng nhập, hiện nút đăng xuất
+        document.getElementById("loginBtn").style.display = "none";
+        document.getElementById("logoutBtn").style.display = "inline-block";
 
-    showPage("homePage");
-} else {
-    document.getElementById("loginStatus").style.color = "red";
-    document.getElementById("loginStatus").textContent = "Sai tài khoản hoặc mật khẩu.";
-}
+        showPage("homePage");
+    } else {
+        document.getElementById("loginStatus").style.color = "red";
+        document.getElementById("loginStatus").textContent = "Sai tài khoản hoặc mật khẩu.";
+    }
 
 });
-function updateRoomData() {
-    const table = document.querySelector("#residentPage table");
-    const db = firebase.database(); // hoặc getDatabase() nếu dùng Firebase SDK mới
-    const hanhlangRef = firebase.database().ref("hanhlang/lau1");
-    const phongRef = firebase.database().ref("phong/lau1");
 
-    onValue(hanhlangRef, (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-            table.rows[1].cells[1].innerText = data.khoi;
-            table.rows[1].cells[2].innerText = data.gas;
-        }
-    });
-
-    onValue(phongRef, (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-            let roomIndex = 0;
-            for (let key in data) {
-                const room = data[key];
-                const row = table.rows[1 + roomIndex];
-                row.cells[4].innerText = room.khoi;
-                row.cells[8].innerText = room.gas;
-                row.cells[12].innerText = room.temperature;
-                row.cells[13].innerText = room.humidity;
-                roomIndex++;
-            }
-        }
-    });
-}
 function logout() {
     isLoggedIn = false;
     alert("Bạn đã đăng xuất.");
@@ -131,4 +105,22 @@ function logout() {
     document.getElementById("loginBtn").style.display = "inline-block";
     showPage("loginPage");
 }
+function showAlert(message) {
+    const alertContainer = document.getElementById('alertContainer');
 
+    const alert = document.createElement('div');
+    alert.classList.add('alert');
+    alert.textContent = message;
+
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = '✖';
+    closeBtn.style.marginLeft = '10px';
+    closeBtn.style.background = 'transparent';
+    closeBtn.style.border = 'none';
+    closeBtn.style.color = 'white';
+    closeBtn.style.cursor = 'pointer';
+    closeBtn.onclick = () => alert.remove();
+
+    alert.appendChild(closeBtn);
+    alertContainer.appendChild(alert);
+}

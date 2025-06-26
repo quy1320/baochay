@@ -2,39 +2,32 @@
 * {
     box-sizing: border-box;
 }
-
 body {
     margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: Arial, sans-serif;
     background-color: #fafafa;
 }
-
 /* Header */
 header {
     background-color: #007bff;
     color: white;
-    padding: 10px 20px;
+    padding: 20px;
 }
-
 .header-container {
     display: flex;
     align-items: center;
     /* canh giữa logo và chữ theo chiều dọc */
     gap: 20px;
 }
-
 .logo {
     width: 300px;
     height: 60px;
     object-fit: contain;
 }
-
 .header-text h1,
 .header-text p {
     margin: 0;
 }
-
 /* Navbar */
 .navbar {
     display: flex;
@@ -42,7 +35,6 @@ header {
     justify-content: flex-start;
     padding-left: 20px;
 }
-
 .navbtn {
     background-color: inherit;
     color: white;
@@ -54,12 +46,10 @@ header {
     border-radius: 8px;
     transition: background 0.3s, border-color 0.3s;
 }
-
 .navbtn:hover {
     background-color: #575757;
     border-color: #777;
 }
-
 /* Trang chính */
 .page {
     width: 100vw;
@@ -67,7 +57,6 @@ header {
     margin: 0;
     padding: 20px;
 }
-
 /* Container chính - kiểu cột dọc */
 .content-column {
     display: flex;
@@ -76,14 +65,12 @@ header {
     max-width: 900px;
     margin: 0 auto;
 }
-
 /* Hàng 2 khối bên dưới */
 .content-row {
     display: flex;
     justify-content: space-between;
     gap: 20px;
 }
-
 /* Box profile chung */
 .profile-box {
     background-color: #f4f4f4;
@@ -101,8 +88,6 @@ header {
     margin: 0;
     /* Xóa khoảng cách dư nếu có */
 }
-
-
 /* Box profile khối trên rộng full */
 .profile-box.single-box {
     width: 102%;
@@ -114,7 +99,6 @@ header {
     text-align: center;
     /* đảm bảo không bị flex chia nhỏ */
 }
-
 /* Ảnh đại diện tròn */
 .avatar {
     width: 80px;
@@ -123,16 +107,13 @@ header {
     object-fit: cover;
     margin-right: 20px;
 }
-
 /* Thông tin trong box */
 .info h3 {
     margin: 0 0 8px 0;
 }
-
 .info p {
     margin: 4px 0;
 }
-
 /* Container WiFi */
 .container {
     text-align: center;
@@ -143,7 +124,6 @@ header {
     width: 800px;
     margin: 0 auto;
 }
-
 .container2 {
     text-align: left;
     padding: 40px;
@@ -153,7 +133,6 @@ header {
     width: 800px;
     margin: 20px auto;
 }
-
 .container2 h1,
 .container2 h2 {
     color: #333;
@@ -187,8 +166,8 @@ footer {
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 10px;
-    margin-top: 40px;
+    padding: 15px;
+    margin-top: 370px;
 }
 
 table {
@@ -209,106 +188,56 @@ td {
     text-align: center;
     vertical-align: middle;
 }
-
-.page {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
-    height: 0;
-    overflow: hidden;
-}
-
-.page.active {
-    opacity: 1;
-    visibility: visible;
-    height: auto;
-    overflow: visible;
-}
-
-#loginPage {
-    justify-content: center;
-    align-items: center;
-    min-height: 60vh;
-    /* giúp căn giữa dọc */
-}
-
-#loginPage .container2 {
-    max-width: 500px;
-    margin: 40px auto;
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.profile-box {
-    border-radius: 12px;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.profile-box:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-}
-
-button,
-.navbtn {
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-button:hover,
-.navbtn:hover {
-    transform: scale(1.03);
-}
-
-table {
-    background-color: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.3s;
-}
-
 table:hover {
     transform: scale(1.005);
 }
-
-#residentPage {
-    background-image: url('istockphoto-1361546459-612x612.jpg');
-    /* hoặc link ảnh nền của bạn */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding: 40px 20px;
+button:hover, .navbtn:hover {
+    transform: scale(1.03);
+}
+button, .navbtn {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+#alertBox {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff4d4d;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    z-index: 1000;
 }
 
-#residentPage table {
-    background-color: rgba(255, 255, 255, 0.6);
-    /* nền trắng mờ 60% */
-    border-radius: 12px;
-    backdrop-filter: blur(6px);
-    /* làm mờ nền phía sau bảng */
-    -webkit-backdrop-filter: blur(6px);
-    /* cho trình duyệt Safari */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
+#alertBox.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+#alertContainer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+    z-index: 1000;
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
-#wifiPage {
-    background-image: url('wifi.jpg');
-    /* hoặc dùng link ảnh online */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding: 40px 20px;
+.alert {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    animation: slideIn 0.5s ease forwards;
 }
 
-#wifiPage .container,
-#wifiPage .container2 {
-    background-color: rgba(255, 255, 255, 0.85);
-    /* trắng mờ */
-    border-radius: 16px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    padding: 30px;
-    margin-bottom: 20px;
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
 }
